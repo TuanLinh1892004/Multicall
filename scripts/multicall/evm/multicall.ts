@@ -1,6 +1,6 @@
 import { ethers, network } from "hardhat";
 import { BigNumber, Contract } from "ethers";
-import { encode, readFromJson } from "../../utils/helpers";
+import { encode, readFromJson } from "../../utils/helper";
 
 export interface Call {
     receiver: string,
