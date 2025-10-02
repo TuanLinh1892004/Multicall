@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
 import { Call, multicallEVM, multicallArtifact } from "./multicall/evm/multicall";
-import { encode } from "./utils/helpers";
+import { encode } from "./utils/helper";
 import { BigNumber } from 'ethers';
 
 const UINT256_MAX = BigNumber.from("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
