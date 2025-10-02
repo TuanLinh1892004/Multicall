@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-import { encode } from "../scripts/utils/helpers";
+import { encode } from "../scripts/utils/helper";
 
 describe("Test tEst teSt tesT", function() {
     let multicall: any;
