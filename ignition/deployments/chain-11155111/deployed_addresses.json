@@ -1,0 +1,5 @@
+{
+  "MulticallModule#EIP7702Multicall": "0x41d2A806a30c4f358A81ABe9193cd6bDa16C02Ba",
+  "MulticallModule#MockERC20Mintable": "0xFC49295E08A5f722190E975d12A411F8a714D070",
+  "MulticallModule#Multicall": "0x93cA115472D6b4a86C3F528884e5AA9989a41bF9"
+}

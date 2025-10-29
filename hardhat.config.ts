@@ -1,69 +1,69 @@
-import "@typechain/hardhat";
-import "hardhat-contract-sizer";
-import "@nomiclabs/hardhat-ethers";
-import "@nomicfoundation/hardhat-toolbox";
-import "@ethersproject/abstract-provider";
-import "@ethersproject/abstract-signer";
-import "@ethersproject/transactions";
-import "@ethersproject/bytes";
-import "hardhat-interface-generator";
-import "hardhat-deploy";
-import { HardhatUserConfig } from "hardhat/config";
-import * as dotenv from "dotenv";
-dotenv.config();
+import type { HardhatUserConfig } from 'hardhat/config';
+import { configVariable } from 'hardhat/config';
 
-const accounts = [process.env.PRIVATE_KEY!];
+import hardhatToolboxViemPlugin from '@nomicfoundation/hardhat-toolbox-viem';
+import hardhatVerify from "@nomicfoundation/hardhat-verify";
+
+const etherscan = (url: string) => ({
+  name: "",
+  blockExplorers: { etherscan: { url, apiUrl: "https://api.etherscan.io/v2/api" } },
+});
 
 const config: HardhatUserConfig = {
+  plugins: [
+    hardhatToolboxViemPlugin, 
+    hardhatVerify
+  ],
   solidity: {
-    compilers: [
-      {
+    profiles: {
+      default: {
+        version: '0.8.28',
+      },
+      production: {
         version: '0.8.28',
         settings: {
-          viaIR: true,
           optimizer: {
             enabled: true,
-            runs: 0,
+            runs: 200,
           },
         },
       },
-    ],
+    },
   },
-  defaultNetwork: "hardhat",
   networks: {
-    hardhat: {
-      chainId: 31337,
-      gasPrice: 1e11,
-      gas: 2e7,
-      live: false,
+    hardhatMainnet: {
+      type: 'edr-simulated',
+      chainType: 'l1',
+    },
+    hardhatOp: {
+      type: 'edr-simulated',
+      chainType: 'op',
     },
     sepolia: {
-      url: "https://eth-sepolia.public.blastapi.io",
+      type: 'http',
       chainId: 11155111,
-      gasPrice: 1e9,
-      gas: 2e7,
-      live: false,
-      accounts: accounts
+      url: "https://ethereum-sepolia-public.nodies.app",
+      accounts: [configVariable('PRIVATE_KEY')],
     },
-    base: {
-      url: "https://virtual.base.eu.rpc.tenderly.co/5f1bbee9-515d-4e7c-9a88-821112f7710f",
-      chainId: 8453,
-      // gasPrice: 1e8,
-      gas: 5e6,
-      live: false,
-      accounts: accounts
+    bscTestnet: {
+      type: "http",
+      chainId: 97,
+      url: "https://bsc-testnet-rpc.publicnode.com",
+      accounts: [configVariable('PRIVATE_KEY')],
     },
   },
-  contractSizer: {
-    alphaSort: true,
-    runOnCompile: false,
-    disambiguatePaths: false,
-  },
-  namedAccounts: {
-    deployer: {
-      default: 0,
+  verify: {
+    etherscan: {
+      apiKey: configVariable('ETHERSCAN_API_KEY'),
+    },
+    blockscout: {
+      enabled: false,
     },
   },
+  chainDescriptors: {
+    11155111: etherscan("https://sepolia.etherscan.io"),
+    97: etherscan("https://testnet.bscscan.com")
+  }
 };
 
 export default config;
