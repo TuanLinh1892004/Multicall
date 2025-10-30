@@ -1,6 +1,6 @@
 import { network } from "hardhat";
 import { getContract } from '../utils/index.js';
-import {  encodeFunctionData, parseUnits } from 'viem';
+import { encodeFunctionData, parseUnits } from 'viem';
 
 async function main() {
   const { viem } = await network.connect({network: "sepolia"});
