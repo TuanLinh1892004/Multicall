@@ -1,0 +1,5 @@
+{
+  "MulticallTestnetModule#Multicall": "0x2A7eceBBeCa463e6a008898320e8cdeD487a5A95",
+  "MulticallTestnetModule#MockERC20Mintable": "0x01404d97E1bb9494db180A5740d05E1A0c84C8BF",
+  "MulticallTestnetModule#EIP7702Multicall": "0xc8b1dafF985847376Dc5FDD7A68b890872abbe18"
+}

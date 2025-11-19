@@ -1,5 +1,5 @@
 {
-  "MulticallModule#EIP7702Multicall": "0x41d2A806a30c4f358A81ABe9193cd6bDa16C02Ba",
-  "MulticallModule#MockERC20Mintable": "0xFC49295E08A5f722190E975d12A411F8a714D070",
-  "MulticallModule#Multicall": "0x93cA115472D6b4a86C3F528884e5AA9989a41bF9"
+  "MulticallTestnetModule#Multicall": "0x113D29e914805e1bEa347b381D224DfebeeF827f",
+  "MulticallTestnetModule#MockERC20Mintable": "0x98B48A5304BFdf058308Ba15e9e397207F510A42",
+  "MulticallTestnetModule#EIP7702Multicall": "0xbF9Ee935c9917b34e6fAA4D96148a5103A0a76F0"
 }

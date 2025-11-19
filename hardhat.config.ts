@@ -9,25 +9,21 @@ const etherscan = (url: string) => ({
   blockExplorers: { etherscan: { url, apiUrl: "https://api.etherscan.io/v2/api" } },
 });
 
+const accounts = [configVariable('PRIVATE_KEY')];
+
 const config: HardhatUserConfig = {
   plugins: [
     hardhatToolboxViemPlugin, 
     hardhatVerify
   ],
   solidity: {
-    profiles: {
-      default: {
-        version: '0.8.28',
+    version: '0.8.28',
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 20000,
       },
-      production: {
-        version: '0.8.28',
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
+      viaIR: true
     },
   },
   networks: {
@@ -42,15 +38,33 @@ const config: HardhatUserConfig = {
     sepolia: {
       type: 'http',
       chainId: 11155111,
-      url: "https://ethereum-sepolia-public.nodies.app",
-      accounts: [configVariable('PRIVATE_KEY')],
+      url: "https://ethereum-sepolia-rpc.publicnode.com",
+      accounts: accounts,
     },
     bscTestnet: {
       type: "http",
       chainId: 97,
       url: "https://bsc-testnet-rpc.publicnode.com",
-      accounts: [configVariable('PRIVATE_KEY')],
+      accounts: accounts,
     },
+    base: {
+      type: "http",
+      chainId: 8453,
+      url: "https://base.llamarpc.com",
+      accounts: accounts,
+    },
+    arbitrum: {
+      type: "http",
+      chainId: 42161,
+      url: "https://arb-mainnet.g.alchemy.com/v2/YcbD-pexZ9JBkkhqXueR-5s2pRQ6uTM0",
+      accounts: accounts,
+    },
+    bsc: {
+      type: "http",
+      chainId: 56,
+      url: "https://binance.llamarpc.com",
+      accounts: accounts,
+    }
   },
   verify: {
     etherscan: {
@@ -62,7 +76,10 @@ const config: HardhatUserConfig = {
   },
   chainDescriptors: {
     11155111: etherscan("https://sepolia.etherscan.io"),
-    97: etherscan("https://testnet.bscscan.com")
+    97: etherscan("https://testnet.bscscan.com"),
+    8453: etherscan("https://basescan.org"),
+    56: etherscan("https://bscscan.com"),
+    42161: etherscan("https://arbiscan.io")
   }
 };
 
